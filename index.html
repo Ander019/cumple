@@ -17,71 +17,307 @@
       padding: 0;
     }
     body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
       font-family: 'Poppins', sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, var(--color1), var(--color3));
-      overflow: hidden;
       color: white;
-    }
-    h1 {
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      margin-bottom: 0.5em;
-      text-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    }
-    p {
-      font-size: clamp(1rem, 4vw, 1.5rem);
-      max-width: 90%;
-      line-height: 1.5;
-    }
-    button {
-      margin-top: 20px;
-      padding: 12px 25px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 25px;
-      background-color: rgba(255,255,255,0.8);
-      color: #ff6b6b;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background-color: white;
-      transform: scale(1.05);
+      background: linear-gradient(135deg, var(--color1), var(--color3));
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
-    /* Globos animados */
+    section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 30px;
+      position: relative;
+    }
+
+    /* SECCIÓN PRINCIPAL */
+    #inicio {
+      background: linear-gradient(135deg, var(--color1), var(--color4));
+      overflow: hidden;
+    }
+
+    .contenedor-principal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .gif-lado {
+      width: clamp(180px, 30vw, 250px);
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+      animation: float 0s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      text-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+
+    p {
+      font-size: clamp(1rem, 4vw, 1.4rem);
+      margin-top: 15px;
+      max-width: 90%;
+      line-height: 1.6;
+    }
+
+    /* 🎈 Globos */
     .balloon {
       position: absolute;
-      bottom: -120px;
+      bottom: -150px;
       width: 60px;
       height: 80px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.4);
       animation: floatUp 7s ease-in infinite;
+      opacity: 0.8;
     }
+
     @keyframes floatUp {
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(-120vh); opacity: 0; }
     }
 
-    /* Responsive ajustes */
-    @media (max-width: 600px) {
-      .balloon {
-        width: 40px;
-        height: 60px;
+    /* ⬇️ Flecha */
+    .flecha-abajo {
+      position: absolute;
+      bottom: 6vh;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.8rem;
+      color: #fff;
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      animation: bounce 1.5s infinite;
+      z-index: 10;
+      user-select: none;
+      padding: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(5px);
+      transition: background 0.3s ease;
+    }
+
+    .flecha-abajo:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 10px); }
+    }
+
+    /* SECCIONES DE MENSAJE */
+    .mensaje-section {
+      background: linear-gradient(135deg, var(--color2), var(--color3));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mensaje-section:nth-child(even) {
+      background: linear-gradient(135deg, var(--color3), var(--color4));
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 4vw, 2rem);
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.2);
+    }
+
+    .mensaje {
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      max-width: 700px;
+      line-height: 1.6;
+      opacity: 0.95;
+      padding: 0 15px;
+    }
+
+    /* 📱 Responsive */
+    @media (max-width: 768px) {
+      .contenedor-principal {
+        flex-direction: column;
       }
-      button {
-        padding: 10px 20px;
+      .gif-lado {
+        width: 75%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .flecha-abajo {
+        font-size: 2.2rem;
+        bottom: 5vh;
       }
     }
   </style>
 </head>
 <body>
-  <h1>🎂 ¡Feliz cumpleaños <span id="nombre"></span>! 🎉</h1>
-  <p
+  <!-- 🎂 SECCIÓN 1 -->
+  <section id="inicio">
+    <div class="contenedor-principal">
+      <img class="gif-lado" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzhwbTQ2am5qYjF6bXR3bHhhZndzM3lrdjU0dnVlbWsxa3liMHJpcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/X42IAaDJ42pHqPllGk/giphy.gif" alt="GIF Izquierda">
+
+      <div>
+        <h1>¡Feliz cumpleaños <span id="nombre"></span>! 🎉</h1>
+        <p>A pesar de que habías dicho que no querías celebrar tu cumpleaños...</p>
+      </div>
+
+      <img class="gif-lado" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzhwbTQ2am5qYjF6bXR3bHhhZndzM3lrdjU0dnVlbWsxa3liMHJpcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/X42IAaDJ42pHqPllGk/giphy.gif" alt="GIF Derecha">
+    </div>
+
+    <div class="flecha-abajo" onclick="scrollToNext()">⬇️</div>
+  </section>
+
+  <!-- 💌 SECCIÓN 2 -->
+  <section class="mensaje-section" id="seccion2">
+    <h2>Como va todo?</h2>
+    <p class="mensaje">
+      A pesar de no hablar mucho ultimamente... siempre hay unos dias donde me ganas de querer hablarte y ver como estas con todo lo que esta pasando
+      en tu vida. pero se que eres fuerte y vas a estar bien, se quede dije que seria mas cercano pero no me daba el tiempo, perdon por eso.
+      pero eso de aqui lo digo, como estas? todo bien? recuerda que estamos aqui para ti.      
+    </p>
+    <img class="gif-lado" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjk5NGJyZWMxZ25jcXZ2cGd1bGNqbnhjNWNtMmZqejdjbDFjZm1oaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/HFmu1MFEmOudG95snb/giphy.gif" alt="GIF Izquierda">
+  </section>
+
+  <!-- 🎁 SECCIÓN 3 -->
+  <section class="mensaje-section">
+    <h2>Cuanto años cumples? XD?</h2>
+    <p class="mensaje">
+      Es una duda que siempre he tenido mafer, pero bueno, creo que cumples 20 o 19
+      si es asi ps tenemos la misma edad, creo que nunca le pregunte a kei sobre ello y ahora
+      ando de curioso por saber cuanto cumples.
+    </p>
+    <img class="gif-lado" src="https://c.tenor.com/LWENCWXzqoMAAAAC/tenor.gif" alt="GIF Izquierda">
+  </section>
+
+  <!-- 📸 SECCIÓN 4 -->
+  <section class="mensaje-section">
+    <h2>Tus estudios?</h2>
+    <p class="mensaje">
+      Recuerdo que me habias que estabas estudiando, no se si ya lo retomaste por que se todo lo que paso
+      si un dia decides retormarlo, pon todo tu empeño en eso, creeme que al final es un logro personal, asi como trabajar, estudiar
+      , estudiar y trabajar al mismo tiempo, todo al final siempre nos da una satisfaccion personal.
+      Animo con eso mafer, que se que puedes lograrlo.
+    </p>
+    <img class="gif-lado" src="https://c.tenor.com/UpfTzEfs5vIAAAAC/tenor.gif" alt="GIF Izquierda">
+  </section>
+
+  <section class="mensaje-section">
+    <h2>Que es poco tiempo para hacer esto ?????</h2>
+    <p class="mensaje">
+      Se que nos conocemos hace poco, creo que 2 meses o 3 pero meh la verdad es que no importa el tiempo
+      conoci a mi amigo y ya nos insultabamos en 2 semanas de conocernos xddd, se que me paso de confianzudo
+      pero tenia que hacerlo, otra cosa es que tenemos a una persona en comun y la otra cosa es que decidiste abrirte contandome
+      tus cosas personales, cosa que me dio confianza en hacer esto. 
+    </p>
+    <img class="gif-lado" src="https://c.tenor.com/VmwF50n-d5sAAAAC/tenor.gif" alt="GIF Izquierda">
+  </section>
+
+  <section class="mensaje-section">
+    <h2>Que soy muy metido ???</h2>
+    <p class="mensaje">
+      Creo que con otra persona tmb me tendria que disculpar por eso 😅 pero ps perdon,
+      soy asi desde pequeño, desde la sombra siempre soy de ver a la gente y ver como estan, apoyarlos si es necesario
+      y no-- no tengo el sindrome de heroe, con muy pocas (por decir que solo con 2 antes de conocerlas) soy asi,
+      es mi forma de ser, pase lo que pase no creo que vaya a cambiar, soy empatico en estos aspectos
+      cosa que es mi debilidad y a la vez mi fortaleza. 
+    </p>
+    <img class="gif-lado" src="https://c.tenor.com/GhhBz_gDkO0AAAAC/tenor.gif" alt="GIF Izquierda">
+  </section>
+
+  <section class="mensaje-section">
+    <h2>Situaciones actuales</h2>
+    <p class="mensaje">
+      Estos dias han sido muy confunsos, no he podido con la incentidumbre pero no lo tengo que mezclar con mi
+      trabajo y estudios. Creo que estoy siendo duro conmigo mismo pero bueno.
+      En esta o la otra semana ya tengo mi piano, podre praticar y a la vez entenderme (mezclamer con mis sentimientos) a mi mismo. 
+    </p>
+    <img class="gif-lado" src="https://c.tenor.com/vEcyUvOTLI4AAAAC/tenor.gif" alt="GIF Izquierda">
+  </section>
+
+  <section class="mensaje-section">
+    <h2>Hablando de instrumentos...</h2>
+    <p class="mensaje">
+      Me dijiste que estabas practicando la guitarrra, que tal te va con ello?
+      o bien no se si ya adquiriste una, sera que un dia me puedas grabar una pieza para ver?
+      el tema de tu voz, lo entiendo, se que es una limitante complicada, pero lo estas llevando
+      estoy seguro de ello.
+    </p>
+    <img class="gif-lado" src="https://media.tenor.com/RIxCFKqtj6cAAAAi/guitar-cat.gif" alt="GIF Izquierda">
+  </section>
+
+  <section class="mensaje-section">
+    <h2>Como son tus dias?</h2>
+    <p class="mensaje">
+      Se que paras todo el dia en la casa, que eso no sea una limitante para ti 
+      se que cuando lo dices de que "que mas voy a hacer" creo que lo dices de una manera 
+      de que estas desmotivada, no te puedo dar opciones o decirte que hacer para que estes bien, por esto
+      ya se me sale de las manos, esto parte de ti, vamos, que hay muchas cosas que hacer, el internet nos trajo cosas buenas
+      despues de todo y si ya estas en eso, como va?
+    </p>
+    <img class="gif-lado" src="https://media.tenor.com/BtapFWwE3EAAAAAi/gato-tonto.gif" alt="GIF Izquierda">
+  </section>
+
+  <section class="mensaje-section">
+    <h2>Mucho texto ¿</h2>
+    <p class="mensaje">
+      Se que escribo demasiado, no me entiendo a mi algunas veces, por espero que al menos te ayude en todo tu proceso de reahbilitacion.  
+    </p>
+    <img class="gif-lado" src="https://media.tenor.com/lCKwsD2OW1kAAAAi/happy-cat-happy-happy-cat.gif" alt="GIF Izquierda">
+  </section>
+
+  
+  <section class="mensaje-section">
+    <h2>Si quieres tomalo como un dia normal</h2>
+    <p class="mensaje">
+      No tienes que hacer nada especial, solo relajate, come algo rico, ve una pelicula que te guste
+      o bien juega un videojuego que te guste, no tienes que hacer nada especial, solo relajate y disfruta tu dia.
+      Feliz cumpleaños mafer, espero que este año sea mejor que el anterior.
+      Todo con calma mafer que estaras bien ya veras.
+      <br><br>
+      - Anderson
+    </p>
+    <img class="gif-lado" src="https://media.tenor.com/HvJ48-NOlfIAAAAi/teto-tetoris.gif" alt="GIF Izquierda">
+  </section>
+
+
+  <script>
+    // Personalizar nombre por URL (?nombre=Anderson)
+    const params = new URLSearchParams(window.location.search);
+    const nombre = params.get("nombre") || "Mafer";
+    document.getElementById("nombre").textContent = nombre;
+
+    // Globos flotando
+    for (let i = 0; i < 20; i++) {
+      const b = document.createElement("div");
+      b.classList.add("balloon");
+      b.style.left = Math.random() * 100 + "vw";
+      b.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+      b.style.animationDuration = 5 + Math.random() * 6 + "s";
+      document.querySelector("#inicio").appendChild(b);
+    }
+
+    // Deslizar hacia la siguiente sección
+    function scrollToNext() {
+      const next = document.querySelector("#seccion2");
+      next.scrollIntoView({ behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
