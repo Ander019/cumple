@@ -309,26 +309,39 @@
 
 
   <script>
-    // Personalizar nombre por URL (?nombre=Anderson)
-    const params = new URLSearchParams(window.location.search);
-    const nombre = params.get("nombre") || "Mafer";
-    document.getElementById("nombre").textContent = nombre;
+  // Personalizar nombre por URL (?nombre=Anderson)
+  const params = new URLSearchParams(window.location.search);
+  const nombre = params.get("nombre") || "Mafer";
+  document.getElementById("nombre").textContent = nombre;
 
-    // Globos flotando
-    for (let i = 0; i < 20; i++) {
-      const b = document.createElement("div");
-      b.classList.add("balloon");
-      b.style.left = Math.random() * 100 + "vw";
-      b.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
-      b.style.animationDuration = 5 + Math.random() * 6 + "s";
-      document.querySelector("#inicio").appendChild(b);
+  // Globos flotando
+  for (let i = 0; i < 20; i++) {
+    const b = document.createElement("div");
+    b.classList.add("balloon");
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+    b.style.animationDuration = 4 + Math.random() * 5 + "s";
+    document.querySelector("#inicio").appendChild(b);
+  }
+
+  // Deslizar hacia la siguiente sección (funcional en todas)
+  function scrollToNext() {
+    const sections = document.querySelectorAll("section");
+    const scrollY = window.scrollY;
+    const vh = window.innerHeight;
+
+    // Buscar la siguiente sección visible
+    for (let i = 0; i < sections.length; i++) {
+      const top = sections[i].offsetTop;
+      if (top - scrollY > 10) {
+        sections[i].scrollIntoView({ behavior: "smooth" });
+        return;
+      }
     }
 
-    // Deslizar hacia la siguiente sección
-    function scrollToNext() {
-      const next = document.querySelector("#seccion2");
-      next.scrollIntoView({ behavior: "smooth" });
-    }
-  </script>
+    // Si está en la última sección → volver al inicio
+    sections[0].scrollIntoView({ behavior: "smooth" });
+  }
+</script>
 </body>
 </html>
