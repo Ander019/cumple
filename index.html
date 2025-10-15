@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🎉 ¡Feliz Cumpleaños!</title>
+  <style>
+    :root {
+      --color1: #ff9a9e;
+      --color2: #fad0c4;
+      --color3: #fbc2eb;
+      --color4: #a18cd1;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, var(--color1), var(--color3));
+      overflow: hidden;
+      color: white;
+    }
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      margin-bottom: 0.5em;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+    p {
+      font-size: clamp(1rem, 4vw, 1.5rem);
+      max-width: 90%;
+      line-height: 1.5;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      background-color: rgba(255,255,255,0.8);
+      color: #ff6b6b;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: white;
+      transform: scale(1.05);
+    }
+
+    /* Globos animados */
+    .balloon {
+      position: absolute;
+      bottom: -120px;
+      width: 60px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      animation: floatUp 7s ease-in infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    /* Responsive ajustes */
+    @media (max-width: 600px) {
+      .balloon {
+        width: 40px;
+        height: 60px;
+      }
+      button {
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎂 ¡Feliz cumpleaños <span id="nombre"></span>! 🎉</h1>
+  <p
